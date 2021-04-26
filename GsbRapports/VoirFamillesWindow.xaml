@@ -1,0 +1,21 @@
+﻿<Window x:Class="GsbRapports.VoirFamillesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GsbRapports"
+        mc:Ignorable="d"
+        Title="Voir les Familles" Height="450" Width="800">
+    <Grid>
+        <DataGrid x:Name="dtg_famille" AutoGenerateColumns="False" 
+                  Height="250" Margin="0,50,0,0"  AlternatingRowBackground = "LightBlue" Width="754" Foreground="Black" Background="{x:Null}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="id"  
+                                    Binding="{Binding id}" Foreground="#FFF17B7B" FontFamily="Verdana Pro Cond Semibold" FontSize="14"/>
+                <DataGridTextColumn Header="libelle" 
+                                    Binding="{Binding libelle}" FontFamily="Verdana Pro Semibold" FontSize="14"  />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Liste des familles de médicaments" HorizontalAlignment="Left" Margin="151,66,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Verdana Pro Cond Semibold"/>
+    </Grid>
+</Window>
