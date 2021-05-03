@@ -15,8 +15,8 @@
                 <MenuItem Header="_Médecins">
 
                 </MenuItem>
-                <MenuItem Header="_Visites">
-
+                <MenuItem Header="_Rapport" x:Name="visites">
+                    <MenuItem Header="_Consulter" x:Name="VoirVisite" Click="VoirVisite_Click"/>
                 </MenuItem>
                 <MenuItem Header="_médicaments">
 
@@ -29,7 +29,6 @@
                     <MenuItem Header="_Modifier" Click="MenuItem_Click_1" />
                     <MenuItem Header="_Ajouter" Click="MenuItem_Click_2" />
                 </MenuItem>
-
             </Menu>
 
 

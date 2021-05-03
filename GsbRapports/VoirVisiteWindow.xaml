@@ -1,0 +1,174 @@
+﻿<Window x:Class="GsbRapports.VoirVisiteWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GsbRapports"
+        mc:Ignorable="d"
+        Title="VoirVisiteWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <StackPanel 
+            Grid.Row="1" 
+            Grid.Column="0" 
+            Grid.ColumnSpan="2"
+            Orientation="Horizontal">
+            <Button 
+                x:Name="previewDataToXml"
+                Click="previewDataToXml_Click"
+                Margin="10"
+                Width="150"
+                Content="Prévisualiser le fichier XML" />
+            <Button 
+                x:Name="resetFilter"
+                Click="resetFilter_Click"
+                Margin="10"
+                Width="150"
+                Content="Reset filtres" />
+            <Button 
+                x:Name="generateXml"
+                Click="generateXml_Click"
+                Margin="10"
+                Width="150"
+                Content="Générer un fichier XML" />
+        </StackPanel>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel
+                Margin="5"
+                Grid.Column="0"
+                Grid.Row="0">
+                <Label Content="Medecin" 
+                   Margin="10"/>
+                <TextBox x:Name="nameMedecin" 
+                     Margin="10"/>
+                <Button 
+                    Content="Rechercher" 
+                    x:Name="searchMedecins" 
+                    Click="searchMedecins_Click"
+                    Foreground="White"
+                    Background="Black"
+                    Width="80"/>
+            </StackPanel>
+            <StackPanel
+                Margin="5"
+                Grid.Column="0"
+                Grid.Row="1">
+                <Label Content="Date début" 
+                   Margin="5"/>
+                <DatePicker 
+                   Margin="10"
+                   x:Name="startDate" 
+                   SelectedDateChanged="startDate_SelectedDateChanged"/>
+                <Label Content="Date de fin" 
+                   Margin="5"/>
+                <DatePicker 
+                   Margin="10"
+                   x:Name="endDate"
+                   SelectedDateChanged="endDate_SelectedDateChanged"/>
+            </StackPanel>
+            <StackPanel
+                Margin="5"
+                Grid.Column="0"
+                Grid.Row="2">
+                <Label 
+                   Content="Visiteurs" 
+                   Margin="5"/>
+                <ComboBox 
+                    x:Name="comboLesVisiteurs"
+                    Margin="10"
+                    IsEditable="False"
+                    SelectionChanged="comboLesVisiteurs_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding prenom}" Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding nom}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button 
+                    x:Name="clearVisiteur"
+                    Margin="15,0,0,0"
+                    Click="clearVisiteur_Click"
+                    HorizontalAlignment="Left"
+                    Width="140"
+                    Content="Supprimer le visiteur"/>
+            </StackPanel>
+        </Grid>
+        <Grid
+            Grid.Column="1"
+            Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel
+                Grid.Row="0">
+                <TextBlock 
+                    x:Name="displayMedecinName"/>
+            </StackPanel>
+            <StackPanel
+                x:Name="datagridMedecins"
+                Grid.Row="1">
+                <Label Content="Sélection d'un médecin"/>
+                <DataGrid x:Name="medecinsDataList"
+                      SelectionUnit="FullRow"
+                      VerticalAlignment="Center"
+                      AutoGenerateColumns="False"
+                      FlowDirection="LeftToRight" 
+                      CanUserAddRows="False" 
+                      CanUserReorderColumns="False"
+                      IsReadOnly="True"
+                      ColumnWidth="auto"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="auto"
+                      SelectedCellsChanged="medecinsDataList_Selected">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nom" Binding="{Binding nom}" />
+                        <DataGridTextColumn Header="Prenom" Binding="{Binding prenom}" />
+                        <DataGridTextColumn Header="Adresse" Binding="{Binding adresse}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <StackPanel
+                Margin="5"
+                Grid.Row="2"
+                x:Name="datagridRapports">
+                <Label Content="Liste rapports"/>
+                <DataGrid x:Name="rapportsDataList"
+                      VerticalAlignment="Center"
+                      Height="auto"
+                      AutoGenerateColumns="False"
+                      FlowDirection="LeftToRight" 
+                      CanUserAddRows="False" 
+                      CanUserReorderColumns="False"
+                      IsReadOnly="True"
+                      ColumnWidth="auto"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="auto">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Prenom Visiteur" Binding="{Binding prenomVisiteur}" />
+                        <DataGridTextColumn Header="Nom Visiteur" Binding="{Binding nomVisiteur}" />
+                        <DataGridTextColumn Header="Prenom Medecin" Binding="{Binding prenomMedecin}" />
+                        <DataGridTextColumn Header="Nom Medecin" Binding="{Binding nomMedecin}" />
+                        <DataGridTextColumn Header="Motif" Binding="{Binding motif}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
