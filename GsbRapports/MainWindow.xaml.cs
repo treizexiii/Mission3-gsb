@@ -1,4 +1,4 @@
-﻿using dllRapportVisites;
+using dllRapportVisites;
 using Newtonsoft.Json;
 using System.Configuration;
 using System.Net;
