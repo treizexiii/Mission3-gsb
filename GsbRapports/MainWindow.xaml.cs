@@ -1,21 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using dllRapportVisites;
 using Newtonsoft.Json;
+using System.Configuration;
+using System.Net;
+using System.Windows;
 
 namespace GsbRapports
 {
@@ -36,9 +23,9 @@ namespace GsbRapports
             this.site = ConfigurationManager.AppSettings.Get("srvLocal");
             this.laSecretaire = new Secretaire();
 
-            this.DckMenu.Visibility= Visibility.Hidden;
+            this.DckMenu.Visibility = Visibility.Hidden;
             this.imgLogo.Visibility = Visibility.Hidden;
-            this.txtBonjour.Visibility = Visibility.Hidden; 
+            this.txtBonjour.Visibility = Visibility.Hidden;
 
         }
 
@@ -100,8 +87,8 @@ namespace GsbRapports
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            VoirFamillesWindow w = new VoirFamillesWindow(this.wb, this.laSecretaire, this.site);
-            w.Show();
+            //VoirFamillesWindow w = new VoirFamillesWindow();
+            //w.Show();
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
@@ -116,10 +103,19 @@ namespace GsbRapports
             w.Show();
         }
 
-        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        private void VoirVisite_Click(object sender, RoutedEventArgs e)
         {
-            ajoutRapportWindow w = new ajoutRapportWindow(this.wb, this.laSecretaire, this.site);
-            w.Show();
+            VoirVisiteWindow visite = new VoirVisiteWindow(wb, site, laSecretaire);
+            visite.Show();
+        }
+
+        private void ModifierVisite_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AjouterVisite_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

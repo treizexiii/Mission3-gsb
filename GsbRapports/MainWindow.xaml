@@ -15,15 +15,13 @@
                 <MenuItem Header="_Médecins">
 
                 </MenuItem>
-                <MenuItem Header="_Visites">
-                    <MenuItem Header="_Ajouter un rapport" Click="MenuItem_Click_3"/>
-
+                <MenuItem Header="_Rapport" x:Name="visites">
+                    <MenuItem Header="_Consulter" x:Name="VoirVisite" Click="VoirVisite_Click"/>
                 </MenuItem>
                 <MenuItem Header="_médicaments">
 
                 </MenuItem>
                 <MenuItem Header="_visiteurs">
-                   
 
                 </MenuItem>
                 <MenuItem Header="_Familles">
@@ -31,7 +29,6 @@
                     <MenuItem Header="_Modifier" Click="MenuItem_Click_1" />
                     <MenuItem Header="_Ajouter" Click="MenuItem_Click_2" />
                 </MenuItem>
-
             </Menu>
 
 
