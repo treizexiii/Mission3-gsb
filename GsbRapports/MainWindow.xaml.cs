@@ -1,6 +1,19 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using System.Net;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using dllRapportVisites;
 using Newtonsoft.Json;
 
@@ -11,76 +24,68 @@ namespace GsbRapports
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly WebClient _wb;
-        private readonly string _site;
-        private string _ticket;
-        private readonly Secretaire _laSecretaire;
-
+        private WebClient wb;
+        private string site;
+        private string ticket;
+        private Secretaire laSecretaire;
         public MainWindow()
         {
-            InitializeComponent();
-            _wb = new WebClient();
-            _site = ConfigurationManager.AppSettings.Get("srvLocal");
-            _laSecretaire = new Secretaire();
 
-            DckMenu.Visibility = Visibility.Hidden;
-            imgLogo.Visibility = Visibility.Hidden;
-            txtBonjour.Visibility = Visibility.Hidden;
+            InitializeComponent();
+            this.wb = new WebClient();
+            this.site = ConfigurationManager.AppSettings.Get("srvLocal");
+            this.laSecretaire = new Secretaire();
+
+            this.DckMenu.Visibility= Visibility.Hidden;
+            this.imgLogo.Visibility = Visibility.Hidden;
+            this.txtBonjour.Visibility = Visibility.Hidden; 
+
         }
 
         private void btnValider_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                string mdp = txtMdp.Password;
-                string login = txtLogin.Text;
+                string mdp = this.txtMdp.Password;
+                string login = this.txtLogin.Text;
                 string reponse; // la réponse retournée  par le serveur
-
                 /* Création de la requête*/
-                string url = _site + "login?login=" + login;
-
+                string url = this.site + "login?login=" + login;
                 /*Appel à l'objet wb pour récupérer le résultat de la requête*/
-                reponse = _wb.DownloadString(url);
-
+                reponse = this.wb.DownloadString(url);
                 /* récupération, après désérialisation et conversion*/
-                _ticket = (string)JsonConvert.DeserializeObject(reponse);
-
-                if (_ticket == null)
+                this.ticket = (string)JsonConvert.DeserializeObject(reponse);
+                if (this.ticket == null)
                 {
                     MessageBox.Show("erreur de Login");
-                    txtLogin.Text = "";
+                    this.txtLogin.Text = "";
                 }
                 else
                 {
-                    _laSecretaire.ticket = _ticket;
-                    _laSecretaire.mdp = mdp;
-
+                    this.laSecretaire.ticket = this.ticket;
+                    this.laSecretaire.mdp = mdp;
                     /* on appelle la fonction de la classe secrétaire qui va hashe ticket+mdp */
-                    string hash = _laSecretaire.getHashTicketMdp();
-
+                    string hash = this.laSecretaire.getHashTicketMdp();
                     /*On crée la requête*/
-                    url = _site + "connexion?login=" + login + "&mdp=" + hash;
-
+                    url = this.site + "connexion?login=" + login + "&mdp=" + hash;
                     /* On récupère la réponse du serveur de type json */
-                    reponse = _wb.DownloadString(url);
-
+                    reponse = this.wb.DownloadString(url);
                     /*On transforme la réponse json en objet Secrétaire!!*/
                     Secretaire s = JsonConvert.DeserializeObject<Secretaire>(reponse);
-
                     if (s == null)
                         MessageBox.Show("erreur de mot de passe!!");
                     else
                     {
                         /* On renseigne le champ de la secrétaire pour la passer aux formulaires*/
-                        _laSecretaire.nom = s.nom;
-                        _laSecretaire.prenom = s.prenom;
-                        _laSecretaire.mdp = txtMdp.Password;
-                        _laSecretaire.ticket = s.ticket;
-                        txtBonjour.Visibility = Visibility.Visible;
-                        txtBonjour.Text = "Bonjour " + _laSecretaire.prenom + " " + _laSecretaire.nom;
-                        DckMenu.Visibility = Visibility.Visible;
-                        imgLogo.Visibility = Visibility.Visible;
-                        stPanel.Visibility = Visibility.Hidden;
+                        this.laSecretaire.nom = s.nom;
+                        this.laSecretaire.prenom = s.prenom;
+                        this.laSecretaire.mdp = this.txtMdp.Password;
+                        this.laSecretaire.ticket = s.ticket;
+                        this.txtBonjour.Visibility = Visibility.Visible;
+                        this.txtBonjour.Text = "Bonjour " + this.laSecretaire.prenom + " " + this.laSecretaire.nom;
+                        this.DckMenu.Visibility = Visibility.Visible;
+                        this.imgLogo.Visibility = Visibility.Visible;
+                        this.stPanel.Visibility = Visibility.Hidden;
                     }
                 }
             }
@@ -95,7 +100,7 @@ namespace GsbRapports
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            VoirFamillesWindow w = new VoirFamillesWindow(_wb, _laSecretaire, _site);
+            VoirFamillesWindow w = new VoirFamillesWindow(this.wb, this.laSecretaire, this.site);
             w.Show();
         }
 
@@ -109,6 +114,13 @@ namespace GsbRapports
         {
             ajoutFamilleWindow w = new ajoutFamilleWindow();
             w.Show();
+        }
+
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            ajoutRapportWindow w = new ajoutRapportWindow(this.wb, this.laSecretaire, this.site);
+            w.Show();
+
         }
     }
 }

@@ -16,12 +16,14 @@
 
                 </MenuItem>
                 <MenuItem Header="_Visites">
+                    <MenuItem Header="_Ajouter un rapport" Click="MenuItem_Click_3"/>
 
                 </MenuItem>
                 <MenuItem Header="_médicaments">
 
                 </MenuItem>
                 <MenuItem Header="_visiteurs">
+                   
 
                 </MenuItem>
                 <MenuItem Header="_Familles">
