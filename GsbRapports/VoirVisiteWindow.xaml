@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GsbRapports"
         mc:Ignorable="d"
-        Title="VoirVisiteWindow" Height="450" Width="800">
+        Title="VoirVisiteWindow" Height="450" Width="855">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="350" />
@@ -38,6 +38,18 @@
                 Margin="10"
                 Width="150"
                 Content="Générer un fichier XML" />
+            <Button 
+                x:Name="ShowRapport"
+                Click="ShowRapport_Click"
+                Margin="10"
+                Width="150"
+                Content="Voir le rapport" />
+            <Button 
+                x:Name="CreateRapport"
+                Click="CreateRapport_Click"
+                Margin="10"
+                Width="150"
+                Content="Créer un rapport" />
         </StackPanel>
         <Grid Grid.Column="0" Grid.Row="0">
             <Grid.RowDefinitions>

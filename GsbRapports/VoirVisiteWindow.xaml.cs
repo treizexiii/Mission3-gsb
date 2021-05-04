@@ -370,6 +370,24 @@ namespace GsbRapports
                 MessageBox.Show("Vous devez afficher une liste de rapport avant la génération d'un fichier xml");
             }
         }
+        private void ShowRapport_Click(object sender, RoutedEventArgs e)
+        {
+            if (rapportsDataList.SelectedItem != null)
+            {
+                DetailsRapport detailsRapport = new DetailsRapport();
+                detailsRapport.Show();
+            }
+            else
+            {
+                MessageBox.Show("Vous devez selectionner un rapport");
+            }
+        }
+
+        private void CreateRapport_Click(object sender, RoutedEventArgs e)
+        {
+            ajoutRapportWindow addRapport = new ajoutRapportWindow(wb, secretaire, site);
+            addRapport.Show();
+        }
     }
     public class LesMedecins
     {
