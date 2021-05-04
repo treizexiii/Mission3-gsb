@@ -65,6 +65,9 @@
     <Compile Include="ajoutFamilleWindow.xaml.cs">
       <DependentUpon>ajoutFamilleWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ajoutRapportWindow.xaml.cs">
+      <DependentUpon>ajoutRapportWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="majFamilleWindow.xaml.cs">
       <DependentUpon>majFamilleWindow.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+        <Page Include="ajoutRapportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -121,6 +128,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

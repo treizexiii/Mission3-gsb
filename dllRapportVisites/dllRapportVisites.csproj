@@ -44,6 +44,7 @@
     <Compile Include="Famille.cs" />
     <Compile Include="Medecin.cs" />
     <Compile Include="Medicament.cs" />
+    <Compile Include="Offre.cs" />
     <Compile Include="Rapport.cs" />
     <Compile Include="Secretaire.cs" />
     <Compile Include="Visiteur.cs" />

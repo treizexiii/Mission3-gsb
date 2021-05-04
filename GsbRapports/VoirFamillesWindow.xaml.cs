@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using dllRapportVisites;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Net;
 using System.Windows;
-using dllRapportVisites;
-using Newtonsoft.Json;
 
 namespace GsbRapports
 {

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace dllRapportVisites
 {
@@ -13,7 +9,7 @@ namespace dllRapportVisites
         public DateTime date { get; set; }
         public int idMedecin { get; set; }
         public string idVisiteur { get; set; }
-     //   public List<Medicament> medicaments { get; set; }
+        //   public List<Medicament> medicaments { get; set; }
         public string nomVisiteur { get; set; }
         public string prenomVisiteur { get; set; }
         public string nomMedecin { get; set; }
@@ -27,7 +23,7 @@ namespace dllRapportVisites
             this.prenomMedecin = prenomMedecin;
             this.prenomVisiteur = prenomVisiteur;
             this.nomVisiteur = nomVisiteur;
-            
+
         }
 
     }

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace dllRapportVisites
+﻿namespace dllRapportVisites
 {
-   public  class Famille
+    public class Famille
     {
         public string id { get; set; }
         public string libelle { get; set; }
