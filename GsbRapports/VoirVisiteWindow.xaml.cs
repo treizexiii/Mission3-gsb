@@ -374,7 +374,9 @@ namespace GsbRapports
         {
             if (rapportsDataList.SelectedItem != null)
             {
-                DetailsRapport detailsRapport = new DetailsRapport();
+                // DetailsRapport detailsRapport = new DetailsRapport();
+                // detailsRapport.Show();
+                DetailsRapport detailsRapport = new DetailsRapport(wb, secretaire, site, (Rapport)rapportsDataList.SelectedItem);
                 detailsRapport.Show();
             }
             else
