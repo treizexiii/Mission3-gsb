@@ -23,7 +23,6 @@ namespace dllRapportVisites
             this.prenomMedecin = prenomMedecin;
             this.prenomVisiteur = prenomVisiteur;
             this.nomVisiteur = nomVisiteur;
-
         }
 
     }

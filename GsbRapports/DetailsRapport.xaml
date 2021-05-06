@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GsbRapports"
         mc:Ignorable="d"
-        Title="Details du Rapport" Height="600" Width="450">
+        Title="Details du Rapport" Height="400" Width="450">
     <Grid>
         <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
             <Label x:Name="nomVisiteur" Margin="40,20,0,0" Height="30">NomVisiteur</Label>
@@ -13,14 +13,18 @@
         </Grid>
         <Grid VerticalAlignment="Top" HorizontalAlignment="Right">
             <Label x:Name="nomMedecin" Margin="0,20,40,0" Height="30">NomMedecin</Label>
-            <Label x:Name="PrenomMedecin" Margin="0,50,40,0" Height="30">PrenomMedecin</Label>
+            <Label x:Name="prenomMedecin" Margin="0,50,40,0" Height="30">PrenomMedecin</Label>
         </Grid>
         <Grid VerticalAlignment="Top" HorizontalAlignment="Center">
             <Label x:Name="Date" Margin="0,50,00,0" Height="30">Date</Label>
         </Grid>
         <Label HorizontalAlignment="Center" Margin="0,-300,0,0" Height="30">Motif :</Label>
-        <TextBox Width="400" Height="100" Margin="0,-150,0,0"></TextBox>
+        <TextBox x:Name="Motif" Width="400" Height="100" Margin="0,-150,0,0"></TextBox>
         <Label HorizontalAlignment="Center" Margin="0,0,0,0" Height="30">Bilan :</Label>
-        <TextBox Width="400" Height="100" Margin="0,150,0,0"></TextBox>
+        <TextBox x:Name="Bilan" Width="400" Height="100" Margin="0,150,0,0"></TextBox>
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,10" Orientation="Horizontal">
+            <Button Width="100" Height="30" Click="UpdateRapport_Click">Modifier</Button>
+            <Button Width="100" Height="30" Margin="15,0,0,0" Click="Cancel_Click">Annuler</Button>
+        </StackPanel>
     </Grid>
 </Window>
