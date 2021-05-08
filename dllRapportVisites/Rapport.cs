@@ -4,6 +4,7 @@ namespace dllRapportVisites
 {
     public class Rapport
     {
+        public string id { get; set; }
         public string motif { get; set; }
         public string bilan { get; set; }
         public DateTime date { get; set; }
@@ -14,8 +15,9 @@ namespace dllRapportVisites
         public string prenomVisiteur { get; set; }
         public string nomMedecin { get; set; }
         public string prenomMedecin { get; set; }
-        public Rapport(string motif, string bilan, DateTime date, string nomVisiteur, string prenomVisiteur, string nomMedecin, string prenomMedecin)
+        public Rapport(string id, string motif, string bilan, DateTime date, string nomVisiteur, string prenomVisiteur, string nomMedecin, string prenomMedecin)
         {
+            this.id = id;
             this.motif = motif;
             this.bilan = bilan;
             this.date = date;

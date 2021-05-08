@@ -1,4 +1,6 @@
 ﻿using dllRapportVisites;
+using System;
+using System.Collections.Specialized;
 using System.Net;
 using System.Windows;
 
@@ -22,6 +24,7 @@ namespace GsbRapports
             _site = site;
             _rapport = rapport;
 
+            IdRapport.Content = _rapport.id;
             nomVisiteur.Content = _rapport.nomVisiteur;
             prenomVisiteur.Content = _rapport.prenomVisiteur;
             nomMedecin.Content = _rapport.nomMedecin;
@@ -42,11 +45,25 @@ namespace GsbRapports
             {
                 if (Bilan.Text != string.Empty)
                 {
-                    string url = _site + "gsbRapports/rapport/" + _rapport;
+                    try
+                    {
+                        string url = _site + "rapport/" + _rapport.id;
+                        NameValueCollection parameters = new NameValueCollection();
+                        parameters.Add("ticket", _secretaire.getHashTicketMdp());
+                        parameters.Add("motif", Motif.Text);
+                        parameters.Add("bilan", Bilan.Text);
+                        _wb.UploadValues(url, "POST", parameters);
+                        MessageBox.Show($"Le rapport {_rapport.id} a bien été modifié.");
+                        this.Close();
+                    }
+                    catch(Exception exception)
+                    {
+                        MessageBox.Show(exception.Message);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Vous devez saisir un motif");
+                    MessageBox.Show("Vous devez saisir un bilan");
                 }
             }
             else

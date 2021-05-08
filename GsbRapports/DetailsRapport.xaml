@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GsbRapports"
         mc:Ignorable="d"
-        Title="Details du Rapport" Height="400" Width="450">
+        Title="Details du Rapport" Height="600" Width="450">
     <Grid>
+        <Label x:Name="IdRapport">idRapport</Label>
         <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
             <Label x:Name="nomVisiteur" Margin="40,20,0,0" Height="30">NomVisiteur</Label>
             <Label x:Name="prenomVisiteur" Margin="40,50,0,0" Height="30">PrenomVisiteur</Label>
@@ -19,7 +20,7 @@
             <Label x:Name="Date" Margin="0,50,00,0" Height="30">Date</Label>
         </Grid>
         <Label HorizontalAlignment="Center" Margin="0,-300,0,0" Height="30">Motif :</Label>
-        <TextBox x:Name="Motif" Width="400" Height="100" Margin="0,-150,0,0"></TextBox>
+        <TextBox x:Name="Motif" Width="400" Height="100" Margin="0,-150,0,0" RenderTransformOrigin="0.502,1.07"></TextBox>
         <Label HorizontalAlignment="Center" Margin="0,0,0,0" Height="30">Bilan :</Label>
         <TextBox x:Name="Bilan" Width="400" Height="100" Margin="0,150,0,0"></TextBox>
         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,10" Orientation="Horizontal">
