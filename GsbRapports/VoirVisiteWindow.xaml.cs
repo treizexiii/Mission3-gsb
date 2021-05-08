@@ -387,10 +387,18 @@ namespace GsbRapports
 
         private void CreateRapport_Click(object sender, RoutedEventArgs e)
         {
-            ajoutRapportWindow addRapport = new ajoutRapportWindow(wb, secretaire, site);
-            addRapport.Show();
+            if (comboLesVisiteurs.SelectedItem != null && medecinsDataList.SelectedItem != null)
+            {
+                ajoutRapportWindow addRapport = new ajoutRapportWindow(wb, secretaire, site);
+                addRapport.Show();
+            }
+            else
+            {
+                MessageBox.Show("Vous devez selectionner un visiteur et un médecin pour continuer?");
+            }
         }
     }
+
     public class LesMedecins
     {
         public List<Medecin> Medecins { get; set; }

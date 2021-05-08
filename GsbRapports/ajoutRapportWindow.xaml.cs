@@ -1,5 +1,6 @@
 ﻿using dllRapportVisites;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net;
@@ -18,12 +19,17 @@ namespace GsbRapports
         private WebClient wb;
         private string site;
         private List<Offre> offres = new List<Offre>();
-        public ajoutRapportWindow(WebClient wb, Secretaire s, string site)
+
+        public ajoutRapportWindow(
+            WebClient wb, 
+            Secretaire s, 
+            string site)
         {
             InitializeComponent();
             this.laSecretaire = s;
             this.wb = wb;
             this.site = site;
+
             // liste des visiteurs par nom
             string url = this.site + "visiteurs?ticket=" + this.laSecretaire.getHashTicketMdp();
             string reponse = this.wb.DownloadString(url);
@@ -34,7 +40,6 @@ namespace GsbRapports
             this.lstVisiteurs.ItemsSource = f;
             this.lstVisiteurs.DisplayMemberPath = "nom";
             this.laSecretaire.ticket = ticket;
-
 
             //Liste des familles de médicaments
             string url1 = this.site + "familles?ticket=" + this.laSecretaire.getHashTicketMdp();
@@ -52,28 +57,26 @@ namespace GsbRapports
             {
                 this.lstQte.Items.Add(i);
             }
-
-
-
-
         }
 
         //bouton pour generer la liste de medecins
         private void buttonRechercher_Click(object sender, RoutedEventArgs e)
         {
             string substring = this.saisieMedecins.Text.Substring(0, 1);
+
             string url = this.site + "medecins?ticket=" + this.laSecretaire.getHashTicketMdp() + "&nom=" + substring;
             string reponse1 = this.wb.DownloadString(url);
             dynamic d1 = JsonConvert.DeserializeObject(reponse1);
+
             string medecins = d1.medecins.ToString();
             string ticket1 = d1.ticket;
+
             List<Medecin> f1 = JsonConvert.DeserializeObject<List<Medecin>>(medecins);
+
             this.lstMedecins.ItemsSource = f1;
             this.lstMedecins.DisplayMemberPath = "name";
             this.laSecretaire.ticket = ticket1;
-
         }
-
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -101,8 +104,6 @@ namespace GsbRapports
             Offre offre = new Offre(idMedic, qte);
             offres.Add(offre);
             this.dtgRecap.Items.Add(offre);
-
-
         }
 
         private void buttonSupMedic_Click(object sender, RoutedEventArgs e)
@@ -110,12 +111,9 @@ namespace GsbRapports
             this.dtgRecap.Items.Clear();
         }
 
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Medecin medecin = (Medecin)this.lstMedecins.SelectedItem;
-
-
         }
 
         private void Button_ValiderRapport(object sender, RoutedEventArgs e)
@@ -132,11 +130,6 @@ namespace GsbRapports
 
             Medecin lemedecin = (Medecin)this.lstMedecins.SelectedItem;
             string medecin = lemedecin.id.ToString();
-
-
-
-
-
 
             string url = this.site + "rapports";
             NameValueCollection parametres = new NameValueCollection();
