@@ -393,6 +393,7 @@ namespace GsbRapports
                 Medecin leMedecin =(Medecin) medecinsDataList.SelectedItem;
                 ajoutRapportWindow addRapport = new ajoutRapportWindow(wb, secretaire, site,leVisiteur,leMedecin);
                 addRapport.Show();
+                this.Close();
             }
             else
             {

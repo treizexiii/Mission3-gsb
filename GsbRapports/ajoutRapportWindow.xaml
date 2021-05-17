@@ -35,6 +35,7 @@
         </DataGrid>
         <DatePicker x:Name="date" HorizontalAlignment="Left" Margin="21,246,0,0" VerticalAlignment="Top" Width="260"/>
         <Label x:Name="nomVisiteur" Content="" HorizontalAlignment="Left" Margin="83,26,0,0" VerticalAlignment="Top" Width="114"/>
+        <Label x:Name="nomMedecin" Content="" HorizontalAlignment="Left" Margin="436,34,0,0" VerticalAlignment="Top"/>
 
 
 

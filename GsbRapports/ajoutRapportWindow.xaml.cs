@@ -36,8 +36,8 @@ namespace GsbRapports
             this.leVisiteur = leVisiteur;
             this.leMedecin = leMedecin;
 
-            this.nomVisiteur.Content = leVisiteur.nom;
-           
+            this.nomVisiteur.Content = leVisiteur.nom + " " + leVisiteur.prenom;
+            this.nomMedecin.Content = leMedecin.nom + " " + leMedecin.prenom;
 
             //Liste des familles de médicaments
             string url1 = this.site + "familles?ticket=" + this.laSecretaire.getHashTicketMdp();
@@ -57,9 +57,7 @@ namespace GsbRapports
             }
         }
 
-      
-
-
+        //Obtenir la liste des médicament d'une famille
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Famille famille = (Famille)this.lstMedicaments.SelectedItem;
@@ -76,6 +74,7 @@ namespace GsbRapports
             this.lstNomMedic.Focus();
         }
 
+        //Ajoute un médicament dans le tableau offres
         private void buttonAjoutMedic_Click(object sender, RoutedEventArgs e)
         {
 
@@ -87,31 +86,27 @@ namespace GsbRapports
             this.dtgRecap.Items.Add(offre);
         }
 
+        //Rafraichi la liste des offres
         private void buttonSupMedic_Click(object sender, RoutedEventArgs e)
         {
             this.dtgRecap.Items.Clear();
         }
-
-       
-
+               
+        //Envoyer le rapport
         private void Button_ValiderRapport(object sender, RoutedEventArgs e)
         {
+            if (this.motif.Text != string.Empty && this.saisieBilan.Text != string.Empty && this.date.SelectedDate != null)
+            {
+                string motif = this.motif.Text;
+                string bilan = this.saisieBilan.Text;
+                string date = ((DateTime)this.date.SelectedDate).ToString("yyyy-MM-dd");
+
             string ticket = this.laSecretaire.getHashTicketMdp();
-            
             string visiteur = this.leVisiteur.id.ToString();
-
-            string motif = this.motif.Text;
-
-            string bilan = this.saisieBilan.Text;
-
-            string date = ((DateTime)this.date.SelectedDate).ToString("yyyy-MM-dd");
-
-           
             string medecin = leMedecin.id.ToString();
-
             string url = this.site + "rapports";
+
             NameValueCollection parametres = new NameValueCollection();
-            //Dictionary<string, string> parametres = new Dictionary<string, string>();
             parametres.Add("ticket", ticket);
             parametres.Add("motif", motif);
             parametres.Add("bilan", bilan);
@@ -124,12 +119,27 @@ namespace GsbRapports
                 parametres.Add("medicaments[" + offre.id + "]", offre.qte);
 
             }
-           // parametres.Add(parametresMedicament);
 
-
-
+            try
+                {
             byte[] tabByte = wb.UploadValues(url, "POST", parametres);
             string reponse1 = UnicodeEncoding.UTF8.GetString(tabByte);
+                laSecretaire.ticket = reponse1;
+                MessageBox.Show("Le rapport a bien été créé.");
+                VoirVisiteWindow voir = new VoirVisiteWindow(wb, site, laSecretaire);
+                voir.Show();
+                this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            
+            }
+            else
+            {
+                MessageBox.Show("Merci de compléter les champs");
+            }
 
         }
 
