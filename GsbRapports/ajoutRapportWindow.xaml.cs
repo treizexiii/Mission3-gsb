@@ -104,8 +104,7 @@ namespace GsbRapports
 
             string bilan = this.bilan.Text;
 
-            string date = this.date.SelectedDate.ToString();
-
+            string date = ((DateTime)this.date.SelectedDate).ToString("yyyy-MM-dd");
            
             string medecin = leMedecin.id.ToString();
 
@@ -130,7 +129,6 @@ namespace GsbRapports
 
             byte[] tabByte = wb.UploadValues(url, "POST", parametres);
             string reponse1 = UnicodeEncoding.UTF8.GetString(tabByte);
-
         }
 
         
