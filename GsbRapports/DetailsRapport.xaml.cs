@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Specialized;
 using System.Net;
+using System.Text;
 using System.Windows;
 
 namespace GsbRapports
@@ -52,8 +53,12 @@ namespace GsbRapports
                         parameters.Add("ticket", _secretaire.getHashTicketMdp());
                         parameters.Add("motif", Motif.Text);
                         parameters.Add("bilan", Bilan.Text);
-                        _wb.UploadValues(url, "POST", parameters);
+                        byte[] tabByte = _wb.UploadValues(url, "POST", parameters);
+                        string reponse1 = UnicodeEncoding.UTF8.GetString(tabByte);
+                        _secretaire.ticket = reponse1;
                         MessageBox.Show($"Le rapport {_rapport.id} a bien été modifié.");
+                        VoirVisiteWindow voir = new VoirVisiteWindow(_wb, _site, _secretaire);
+                        voir.Show();
                         this.Close();
                     }
                     catch(Exception exception)
