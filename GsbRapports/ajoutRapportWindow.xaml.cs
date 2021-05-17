@@ -102,9 +102,9 @@ namespace GsbRapports
 
             string motif = this.motif.Text;
 
-            string bilan = this.bilan.Text;
+            string bilan = this.saisieBilan.Text;
 
-            string date = this.date.SelectedDate.ToString();
+            string date = ((DateTime)this.date.SelectedDate).ToString("yyyy-MM-dd");
 
            
             string medecin = leMedecin.id.ToString();
@@ -115,16 +115,16 @@ namespace GsbRapports
             parametres.Add("ticket", ticket);
             parametres.Add("motif", motif);
             parametres.Add("bilan", bilan);
-            parametres.Add("date", date);
+            parametres.Add("date", date );
             parametres.Add("idMedecin", medecin);
             parametres.Add("idVisiteur", visiteur);
             NameValueCollection parametresMedicament = new NameValueCollection();
             foreach (var offre in offres)
             {
-                parametresMedicament.Add("medicaments[" + offre.id + "]", offre.qte);
+                parametres.Add("medicaments[" + offre.id + "]", offre.qte);
 
             }
-            parametres.Add(parametresMedicament);
+           // parametres.Add(parametresMedicament);
 
 
 
