@@ -19,27 +19,25 @@ namespace GsbRapports
         private WebClient wb;
         private string site;
         private List<Offre> offres = new List<Offre>();
+        private Visiteur leVisiteur;
+        private Medecin leMedecin;
 
         public ajoutRapportWindow(
-            WebClient wb, 
-            Secretaire s, 
-            string site)
+            WebClient wb,
+            Secretaire s,
+            string site,
+            Visiteur leVisiteur,
+            Medecin leMedecin)
         {
             InitializeComponent();
             this.laSecretaire = s;
             this.wb = wb;
             this.site = site;
+            this.leVisiteur = leVisiteur;
+            this.leMedecin = leMedecin;
 
-            // liste des visiteurs par nom
-            string url = this.site + "visiteurs?ticket=" + this.laSecretaire.getHashTicketMdp();
-            string reponse = this.wb.DownloadString(url);
-            dynamic visiteursObjects = JsonConvert.DeserializeObject(reponse);
-            string visiteursConvertToString = visiteursObjects.visiteurs.ToString();
-            string ticket = visiteursObjects.ticket;
-            List<Visiteur> f = JsonConvert.DeserializeObject<List<Visiteur>>(visiteursConvertToString);
-            this.lstVisiteurs.ItemsSource = f;
-            this.lstVisiteurs.DisplayMemberPath = "nom";
-            this.laSecretaire.ticket = ticket;
+            this.nomVisiteur.Content = leVisiteur.nom;
+           
 
             //Liste des familles de médicaments
             string url1 = this.site + "familles?ticket=" + this.laSecretaire.getHashTicketMdp();
@@ -53,30 +51,13 @@ namespace GsbRapports
             this.laSecretaire.ticket = ticket2;
 
             //Liste Qte medicaments
-            for (int i = 0; i < 15; i++)
+            for (int i = 1; i < 15; i++)
             {
                 this.lstQte.Items.Add(i);
             }
         }
 
-        //bouton pour generer la liste de medecins
-        private void buttonRechercher_Click(object sender, RoutedEventArgs e)
-        {
-            string substring = this.saisieMedecins.Text.Substring(0, 1);
-
-            string url = this.site + "medecins?ticket=" + this.laSecretaire.getHashTicketMdp() + "&nom=" + substring;
-            string reponse1 = this.wb.DownloadString(url);
-            dynamic d1 = JsonConvert.DeserializeObject(reponse1);
-
-            string medecins = d1.medecins.ToString();
-            string ticket1 = d1.ticket;
-
-            List<Medecin> f1 = JsonConvert.DeserializeObject<List<Medecin>>(medecins);
-
-            this.lstMedecins.ItemsSource = f1;
-            this.lstMedecins.DisplayMemberPath = "name";
-            this.laSecretaire.ticket = ticket1;
-        }
+      
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -111,16 +92,13 @@ namespace GsbRapports
             this.dtgRecap.Items.Clear();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            Medecin medecin = (Medecin)this.lstMedecins.SelectedItem;
-        }
+       
 
         private void Button_ValiderRapport(object sender, RoutedEventArgs e)
         {
             string ticket = this.laSecretaire.getHashTicketMdp();
-            Visiteur leVisiteur = (Visiteur)this.lstVisiteurs.SelectedItem;
-            string visiteur = leVisiteur.id.ToString();
+            
+            string visiteur = this.leVisiteur.id.ToString();
 
             string motif = this.motif.Text;
 
@@ -128,8 +106,8 @@ namespace GsbRapports
 
             string date = this.date.SelectedDate.ToString();
 
-            Medecin lemedecin = (Medecin)this.lstMedecins.SelectedItem;
-            string medecin = lemedecin.id.ToString();
+           
+            string medecin = leMedecin.id.ToString();
 
             string url = this.site + "rapports";
             NameValueCollection parametres = new NameValueCollection();
@@ -155,11 +133,9 @@ namespace GsbRapports
 
         }
 
-        private void lstMedecins_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Medecin medecin = (Medecin)this.lstMedecins.SelectedItem;
+        
 
-        }
+       
 
 
     }

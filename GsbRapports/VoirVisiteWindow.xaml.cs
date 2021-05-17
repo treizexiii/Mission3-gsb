@@ -389,7 +389,9 @@ namespace GsbRapports
         {
             if (comboLesVisiteurs.SelectedItem != null && medecinsDataList.SelectedItem != null)
             {
-                ajoutRapportWindow addRapport = new ajoutRapportWindow(wb, secretaire, site);
+                Visiteur leVisiteur = (Visiteur)comboLesVisiteurs.SelectedItem;
+                Medecin leMedecin =(Medecin) medecinsDataList.SelectedItem;
+                ajoutRapportWindow addRapport = new ajoutRapportWindow(wb, secretaire, site,leVisiteur,leMedecin);
                 addRapport.Show();
             }
             else
