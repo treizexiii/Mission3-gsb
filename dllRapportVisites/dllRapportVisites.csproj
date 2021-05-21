@@ -46,7 +46,9 @@
     <Compile Include="Medicament.cs" />
     <Compile Include="Offre.cs" />
     <Compile Include="Rapport.cs" />
+    <Compile Include="Response.cs" />
     <Compile Include="Secretaire.cs" />
+    <Compile Include="Services.cs" />
     <Compile Include="Visiteur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -37,6 +37,8 @@ namespace GsbRapports
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
+            VoirVisiteWindow voir = new VoirVisiteWindow(_wb, _site, _secretaire);
+            voir.Show();
             this.Close();
         }
 
@@ -61,7 +63,7 @@ namespace GsbRapports
                         voir.Show();
                         this.Close();
                     }
-                    catch(Exception exception)
+                    catch (Exception exception)
                     {
                         MessageBox.Show(exception.Message);
                     }

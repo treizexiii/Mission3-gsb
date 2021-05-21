@@ -6,7 +6,6 @@ using System.Collections.Specialized;
 using System.Net;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace GsbRapports
 {
@@ -91,7 +90,7 @@ namespace GsbRapports
         {
             this.dtgRecap.Items.Clear();
         }
-               
+
         //Envoyer le rapport
         private void Button_ValiderRapport(object sender, RoutedEventArgs e)
         {
@@ -101,40 +100,40 @@ namespace GsbRapports
                 string bilan = this.saisieBilan.Text;
                 string date = ((DateTime)this.date.SelectedDate).ToString("yyyy-MM-dd");
 
-            string ticket = this.laSecretaire.getHashTicketMdp();
-            string visiteur = this.leVisiteur.id.ToString();
-            string medecin = leMedecin.id.ToString();
-            string url = this.site + "rapports";
+                string ticket = this.laSecretaire.getHashTicketMdp();
+                string visiteur = this.leVisiteur.id.ToString();
+                string medecin = leMedecin.id.ToString();
+                string url = this.site + "rapports";
 
-            NameValueCollection parametres = new NameValueCollection();
-            parametres.Add("ticket", ticket);
-            parametres.Add("motif", motif);
-            parametres.Add("bilan", bilan);
-            parametres.Add("date", date );
-            parametres.Add("idMedecin", medecin);
-            parametres.Add("idVisiteur", visiteur);
-            NameValueCollection parametresMedicament = new NameValueCollection();
-            foreach (var offre in offres)
-            {
-                parametres.Add("medicaments[" + offre.id + "]", offre.qte);
-
-            }
-
-            try
+                NameValueCollection parametres = new NameValueCollection();
+                parametres.Add("ticket", ticket);
+                parametres.Add("motif", motif);
+                parametres.Add("bilan", bilan);
+                parametres.Add("date", date);
+                parametres.Add("idMedecin", medecin);
+                parametres.Add("idVisiteur", visiteur);
+                NameValueCollection parametresMedicament = new NameValueCollection();
+                foreach (var offre in offres)
                 {
-            byte[] tabByte = wb.UploadValues(url, "POST", parametres);
-            string reponse1 = UnicodeEncoding.UTF8.GetString(tabByte);
-                laSecretaire.ticket = reponse1;
-                MessageBox.Show("Le rapport a bien été créé.");
-                VoirVisiteWindow voir = new VoirVisiteWindow(wb, site, laSecretaire);
-                voir.Show();
-                this.Close();
+                    parametres.Add("medicaments[" + offre.id + "]", offre.qte);
+
+                }
+
+                try
+                {
+                    byte[] tabByte = wb.UploadValues(url, "POST", parametres);
+                    string reponse1 = UnicodeEncoding.UTF8.GetString(tabByte);
+                    laSecretaire.ticket = reponse1;
+                    MessageBox.Show("Le rapport a bien été créé.");
+                    VoirVisiteWindow voir = new VoirVisiteWindow(wb, site, laSecretaire);
+                    voir.Show();
+                    this.Close();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-            
+
             }
             else
             {
@@ -143,9 +142,9 @@ namespace GsbRapports
 
         }
 
-        
 
-       
+
+
 
 
     }

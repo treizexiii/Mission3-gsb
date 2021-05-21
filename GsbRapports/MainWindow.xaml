@@ -13,7 +13,7 @@
                     <MenuItem Header="_Quitter"/>
                 </MenuItem>
                 <MenuItem Header="_Médecins">
-
+                    <MenuItem Header="_Consulter" x:Name="VoirMedecins" Click="VoirMedecins_Click" />
                 </MenuItem>
                 <MenuItem Header="_Rapport" x:Name="visites">
                     <MenuItem Header="_Consulter" x:Name="VoirVisite" Click="VoirVisite_Click"/>

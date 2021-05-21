@@ -118,5 +118,11 @@ namespace GsbRapports
         {
 
         }
+
+        private void VoirMedecins_Click(object sender, RoutedEventArgs e)
+        {
+            VoirMedecins medecins = new VoirMedecins(wb, site, laSecretaire);
+            medecins.Show();
+        }
     }
 }

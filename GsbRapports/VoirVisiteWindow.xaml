@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GsbRapports"
         mc:Ignorable="d"
-        Title="VoirVisiteWindow" Height="450" Width="900">
+        Title="Consulter les rapports" Height="570" Width="900">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="350" />
@@ -25,13 +25,13 @@
                 Click="previewDataToXml_Click"
                 Margin="10"
                 Width="150"
-                Content="Prévisualiser le fichier XML" />
+                Content="Rechercher les rapports" />
             <Button 
                 x:Name="resetFilter"
                 Click="resetFilter_Click"
                 Margin="10"
                 Width="150"
-                Content="Reset filtres" />
+                Content="Rafraichir les filtres" />
             <Button 
                 x:Name="generateXml"
                 Click="generateXml_Click"
@@ -117,7 +117,7 @@
                     Click="clearVisiteur_Click"
                     HorizontalAlignment="Left"
                     Width="140"
-                    Content="Supprimer le visiteur"/>
+                    Content="Rafraichir le visiteur"/>
             </StackPanel>
         </Grid>
         <Grid
@@ -138,6 +138,8 @@
                 Grid.Row="1">
                 <Label Content="Sélection d'un médecin"/>
                 <DataGrid x:Name="medecinsDataList"
+                      Height="auto"
+                      MaxHeight="190"
                       SelectionUnit="FullRow"
                       VerticalAlignment="Center"
                       AutoGenerateColumns="False"
@@ -164,6 +166,7 @@
                 <DataGrid x:Name="rapportsDataList"
                       VerticalAlignment="Center"
                       Height="auto"
+                      MaxHeight="170"
                       AutoGenerateColumns="False"
                       FlowDirection="LeftToRight" 
                       CanUserAddRows="False" 

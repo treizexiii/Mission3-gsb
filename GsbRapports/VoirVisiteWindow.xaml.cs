@@ -209,12 +209,14 @@ namespace GsbRapports
 
             rapportsDataList.ItemsSource = lesRapports;
         }
+
         private void ClearInputVisiteur()
         {
             selectedVisiteur = null;
             comboLesVisiteurs.SelectedItem = null;
             rapportsDataList.ItemsSource = null;
         }
+
         private void addElementToListRapport(List<Rapport> listRapports)
         {
             foreach (var rapport in listRapports)
@@ -370,14 +372,27 @@ namespace GsbRapports
                 MessageBox.Show("Vous devez afficher une liste de rapport avant la génération d'un fichier xml");
             }
         }
+
         private void ShowRapport_Click(object sender, RoutedEventArgs e)
         {
+            //on vérifie que le rapport est bien selectionné
             if (rapportsDataList.SelectedItem != null)
             {
-                // DetailsRapport detailsRapport = new DetailsRapport();
-                // detailsRapport.Show();
-                DetailsRapport detailsRapport = new DetailsRapport(wb, secretaire, site, (Rapport)rapportsDataList.SelectedItem);
+                var rapport = (Rapport)rapportsDataList.SelectedItem;
+
+                // On vérifie que le rapport contient bien les infos du visiteur sinon elles sont ajoutées
+                if (rapport.idVisiteur == null && rapport.nomVisiteur == null && rapport.prenomVisiteur == null)
+                {
+                    var visiteur = (Visiteur)comboLesVisiteurs.SelectedItem;
+                    rapport.idVisiteur = visiteur.id;
+                    rapport.nomVisiteur = visiteur.nom;
+                    rapport.prenomVisiteur = visiteur.prenom;
+                }
+
+                // On génére la vue détails
+                DetailsRapport detailsRapport = new DetailsRapport(wb, secretaire, site, rapport);
                 detailsRapport.Show();
+                this.Close();
             }
             else
             {
@@ -390,8 +405,8 @@ namespace GsbRapports
             if (comboLesVisiteurs.SelectedItem != null && medecinsDataList.SelectedItem != null)
             {
                 Visiteur leVisiteur = (Visiteur)comboLesVisiteurs.SelectedItem;
-                Medecin leMedecin =(Medecin) medecinsDataList.SelectedItem;
-                ajoutRapportWindow addRapport = new ajoutRapportWindow(wb, secretaire, site,leVisiteur,leMedecin);
+                Medecin leMedecin = (Medecin)medecinsDataList.SelectedItem;
+                ajoutRapportWindow addRapport = new ajoutRapportWindow(wb, secretaire, site, leVisiteur, leMedecin);
                 addRapport.Show();
                 this.Close();
             }
