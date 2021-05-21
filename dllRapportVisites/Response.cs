@@ -21,4 +21,12 @@ namespace dllRapportVisites
         public List<Visiteur> Visiteurs { get; set; }
         public string ticket { get; set; }
     }
+
+
+    //Pas encore fonctionnel
+    public class Response
+    {
+        public List<dynamic> Object { get; set; }
+        public string Ticket { get; set; }
+    }
 }

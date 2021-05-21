@@ -15,6 +15,7 @@ namespace GsbRapports
         private string site;
         private string ticket;
         private Secretaire laSecretaire;
+        
         public MainWindow()
         {
 
