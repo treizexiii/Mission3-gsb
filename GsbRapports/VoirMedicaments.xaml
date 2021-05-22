@@ -1,0 +1,55 @@
+﻿<Window x:Class="GsbRapports.VoirMedicaments"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GsbRapports"
+        mc:Ignorable="d"
+        Title="Consulter les médicaments" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="310" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" VerticalAlignment="Center" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Margin="20">
+                    <StackPanel Margin="10">
+                        <Label Content="Filter par famille de médicaments :" />
+                        <StackPanel Orientation="Horizontal" >
+                            <ComboBox x:Name="ListFamille" Width="300" Margin="10" />
+                            <Button x:Name="Rechercher" Content="Rechercher" Margin="10" Padding="5" Click="Rechercher_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Margin="10">
+                        <Label Content="Rechercher les médicaments offerts :"/>
+                        <StackPanel Orientation="Horizontal" >
+                            <DatePicker x:Name="DateStart"  Margin="10" Width="150" FirstDayOfWeek="Monday"/>
+                            <Label Content="au" Padding="0,15,0,0"/>
+                            <DatePicker x:Name="DateEnd" Margin="10" Width="150"/>
+                            <Button Content="Voir" Margin="10" Padding="5" Click="FilterByDate_Click"/>
+                        </StackPanel>
+                        <Button x:Name="GenerateXml" Content="Exporter" HorizontalAlignment="Center" Padding="5" Click="GenerateXml_Click" IsEnabled="False"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="1" >
+                    <Button x:Name="VoirMedicament" Content="Voir le médicament" Height="30" Width="200" Margin="10" Click="VoirMedicament_Click"/>
+                    <Button x:Name="AddMedicament" Content="Ajouter un médicament" Height="30" Width="200" Margin="10"/>
+                    <Button x:Name="Quitter" Content="Quitter" Height="30" Width="200" Margin="10" Click="Quitter_Click"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Column="1" VerticalAlignment="top">
+            <DataGrid x:Name="ListMedicaments" Margin="20" MaxHeight="300" AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="False" IsReadOnly="True" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nom" Binding="{Binding nomCommercial}" />
+                    <DataGridTextColumn Header="Famille" Binding="{Binding idFamille}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Window>

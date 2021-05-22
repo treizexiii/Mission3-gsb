@@ -11,7 +11,7 @@ namespace dllRapportVisites
     {
         public static readonly string _path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\";
 
-        public static bool GenerateXml(dynamic obj, string name)
+        public static bool GenerateXml(dynamic obj, string name, DateTime? dateStart = null, DateTime? dateEnd = null)
         {
             //Xml pour rapports
             if (obj is List<Rapport>)
@@ -43,13 +43,20 @@ namespace dllRapportVisites
                     foreach (Medicament medicament in obj)
                     {
                         xEle.Add(new XElement("Rapport",
-                                                   new XElement("Date", medicament.nomCommercial),
-                                                   new XElement("NomMedecin", medicament.composition),
-                                                   new XElement("PrenomMedecin", medicament.contreIndications),
-                                                   new XElement("NomVisiteur", medicament.effets),
-                                                   new XElement("PrenomVisiteur", medicament.idFamille)));
+                                                   new XElement("NomCommercial", medicament.nomCommercial),
+                                                   new XElement("Composition", medicament.composition),
+                                                   new XElement("ContreIindication", medicament.contreIndications),
+                                                   new XElement("Effets", medicament.effets),
+                                                   new XElement("IdFamille", medicament.idFamille)));
                     }
-                    xEle.Save(_path + name + DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString() + ".xml");
+                    if (dateStart == null && dateEnd == null)
+                    {
+                        xEle.Save(_path + name + DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString() + ".xml");
+                    }
+                    else
+                    {
+                        xEle.Save(_path + name + dateStart.ToString() + "to" + dateEnd.ToString() + ".xml");
+                    }
                 }
                 return true;
             }

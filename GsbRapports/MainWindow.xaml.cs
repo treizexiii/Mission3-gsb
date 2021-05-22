@@ -125,5 +125,11 @@ namespace GsbRapports
             VoirMedecins medecins = new VoirMedecins(wb, site, laSecretaire);
             medecins.Show();
         }
+
+        private void VoirMedicament_Click(object sender, RoutedEventArgs e)
+        {
+            VoirMedicaments medicaments = new VoirMedicaments(wb, site, laSecretaire);
+            medicaments.Show();
+        }
     }
 }

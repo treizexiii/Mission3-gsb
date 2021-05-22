@@ -11,14 +11,28 @@ namespace dllRapportVisites
         public List<Medecin> Medecins { get; set; }
         public string ticket { get; set; }
     }
+
     public class ResponseRapports
     {
         public List<Rapport> rapports { get; set; }
         public string ticket { get; set; }
     }
+
+    public class ResponseFamily
+    {
+        public List<Famille> Familles { get; set; }
+        public string ticket { get; set; }
+    }
+
     public class ResponseVisiteurs
     {
         public List<Visiteur> Visiteurs { get; set; }
+        public string ticket { get; set; }
+    }
+
+    public class ResponseMedicaments
+    {
+        public List<Medicament> Medicaments { get; set; }
         public string ticket { get; set; }
     }
 

@@ -3,7 +3,19 @@ Winform application for school project
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-<i><strong>version 1.0:</strong></i>
+<i><stong>Version 1.1</stong></i>
+
+
+<strong>Ajout:</strong>
+<ul>
+  <li>Ajout d'une vue "Consulter les médicaments"</li>
+  <li>Ajout d'une vue "Détails du médicament"</li>
+  <li>Ajout d'un nouveau jeu de réponse pour les médicaments</li>
+</ul>
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+<i><strong>Version 1.0:</strong></i>
 
 
 <strong>Ajouts :</strong>
@@ -12,7 +24,7 @@ Winform application for school project
   <li>Ajout d'une vue "Détails du médecin"</li>
   <li>Ajout de la modification d'un médecin</li>
   <li>Factorisation de la génération d'un fichier XML (appelé via la classe static Services)</li>
-  <li>ajout dans la librairie d'un jeu de réponses selon la requete demandé à l'API</li>
+  <li>Ajout dans la librairie d'un jeu de réponses selon la requete demandé à l'API</li>
 </ul>
 
 <strong>Correction:</strong>
