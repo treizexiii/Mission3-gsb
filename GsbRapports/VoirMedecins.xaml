@@ -25,7 +25,6 @@
             <StackPanel Grid.Row="1">
                 <Button x:Name="Details" Content="Voir le médecin" Width="150" Height="30" Margin="5" Click="Details_Click"/>
                 <Button x:Name="Create" Content="Créer un médecin" Width="150" Height="30" Margin="5"/>
-                <Button x:Name="XmlList" Content="Générer un Xml" Width="150" Height="30" Margin="5"/>
             </StackPanel>
             <StackPanel Grid.Row="2">
                 <Button x:Name="Back" Content="Quitter" Width="150" Height="30" Margin="50" Click="Back_Click"/>

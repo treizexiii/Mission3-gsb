@@ -19,7 +19,7 @@
                     <MenuItem Header="_Consulter" x:Name="VoirVisite" Click="VoirVisite_Click"/>
                 </MenuItem>
                 <MenuItem Header="_médicaments">
-
+                    <MenuItem Header="_Consulter" x:Name="VoirMedicaments" Click="VoirMedicament_Click" />
                 </MenuItem>
                 <MenuItem Header="_visiteurs">
 

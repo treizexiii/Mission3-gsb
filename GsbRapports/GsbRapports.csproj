@@ -71,6 +71,9 @@
     <Compile Include="DetailsMedecin.xaml.cs">
       <DependentUpon>DetailsMedecin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DetailsMedicament.xaml.cs">
+      <DependentUpon>DetailsMedicament.xaml</DependentUpon>
+    </Compile>
     <Compile Include="majFamilleWindow.xaml.cs">
       <DependentUpon>majFamilleWindow.xaml</DependentUpon>
     </Compile>
@@ -79,6 +82,9 @@
     </Compile>
     <Compile Include="VoirMedecins.xaml.cs">
       <DependentUpon>VoirMedecins.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoirMedicaments.xaml.cs">
+      <DependentUpon>VoirMedicaments.xaml</DependentUpon>
     </Compile>
     <Compile Include="VoirVisiteWindow.xaml.cs">
       <DependentUpon>VoirVisiteWindow.xaml</DependentUpon>
@@ -91,6 +97,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DetailsMedecin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DetailsMedicament.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VoirMedecins.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoirMedicaments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
