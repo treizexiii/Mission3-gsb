@@ -15,6 +15,7 @@ namespace GsbRapports
         private string site;
         private string ticket;
         private Secretaire laSecretaire;
+        
         public MainWindow()
         {
 
@@ -117,6 +118,18 @@ namespace GsbRapports
         private void AjouterVisite_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void VoirMedecins_Click(object sender, RoutedEventArgs e)
+        {
+            VoirMedecins medecins = new VoirMedecins(wb, site, laSecretaire);
+            medecins.Show();
+        }
+
+        private void VoirMedicament_Click(object sender, RoutedEventArgs e)
+        {
+            VoirMedicaments medicaments = new VoirMedicaments(wb, site, laSecretaire);
+            medicaments.Show();
         }
     }
 }
