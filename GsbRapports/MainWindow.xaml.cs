@@ -27,7 +27,6 @@ namespace GsbRapports
             this.DckMenu.Visibility = Visibility.Hidden;
             this.imgLogo.Visibility = Visibility.Hidden;
             this.txtBonjour.Visibility = Visibility.Hidden;
-
         }
 
         private void btnValider_Click(object sender, RoutedEventArgs e)

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows;
@@ -67,8 +68,17 @@ namespace GsbRapports
                         parameters.Add("tel", Tel.Text);
                         parameters.Add("specialite", Specialite.Text);
                         byte[] tabByte = _wb.UploadValues(url, "POST", parameters);
-                        string reponse1 = UnicodeEncoding.UTF8.GetString(tabByte);
-                        _secretaire.ticket = reponse1;
+                        string response = Encoding.UTF8.GetString(tabByte);
+                        var responseConverted = Encoding.UTF8.GetString(Encoding.Convert(
+                                            Encoding.Default,
+                                            Encoding.UTF8,
+                                            Encoding.Default
+                                                .GetBytes(response)
+                                                .Where(b => b != '\n')
+                                                .ToArray()
+                                            )
+                                        );
+                        _secretaire.ticket = responseConverted;
                         MessageBox.Show($"Le medecin {_medecin.id} a bien été modifié.");
                         VoirMedecins voir = new VoirMedecins(_wb, _site, _secretaire);
                         voir.Show();

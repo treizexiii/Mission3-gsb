@@ -77,7 +77,6 @@ namespace GsbRapports
         //Ajoute un médicament dans le tableau offres
         private void buttonAjoutMedic_Click(object sender, RoutedEventArgs e)
         {
-
             Medicament medicament = (Medicament)this.lstNomMedic.SelectedItem;
             string idMedic = medicament.id.ToString();
             string qte = this.lstQte.SelectedValue.ToString();
@@ -135,36 +134,30 @@ namespace GsbRapports
                 parametres.Add("date", date);
                 parametres.Add("idMedecin", medecin);
                 parametres.Add("idVisiteur", visiteur);
-                NameValueCollection parametresMedicament = new NameValueCollection();
+
                 foreach (var offre in offres)
                 {
                     parametres.Add("medicaments[" + offre.id + "]", offre.qte);
-
                 }
 
                 try
                 {
-
-            byte[] tabByte = wb.UploadValues(url, "POST", parametres);
-            string reponse1 = UnicodeEncoding.UTF8.GetString(tabByte);
+                    byte[] tabByte = wb.UploadValues(url, "POST", parametres);
+                    string response = UnicodeEncoding.UTF8.GetString(tabByte);
                     var responseConverted = Encoding.UTF8.GetString(Encoding.Convert(
                                                 Encoding.Default,
                                                 Encoding.UTF8,
                                                 Encoding.Default
-                                                    .GetBytes(reponse1)
+                                                    .GetBytes(response)
                                                     .Where(b => b != '\n')
                                                     .ToArray()
                                                 )
                                             );
-
-
-
-
                     laSecretaire.ticket = responseConverted;
-                MessageBox.Show("Le rapport a bien été créé.");
-                VoirVisiteWindow voir = new VoirVisiteWindow(wb, site, laSecretaire);
-                voir.Show();
-                this.Close();
+                    MessageBox.Show("Le rapport a bien été créé.");
+                    VoirVisiteWindow voir = new VoirVisiteWindow(wb, site, laSecretaire);
+                    voir.Show();
+                    this.Close();
 
                 }
                 catch (Exception ex)
@@ -177,13 +170,6 @@ namespace GsbRapports
             {
                 MessageBox.Show("Merci de compléter les champs");
             }
-
         }
-
-
-
-
-
-
     }
 }
