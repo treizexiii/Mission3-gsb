@@ -3,6 +3,23 @@ Winform application for school project
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+<i><stong>Version 1.2</stong></i>
+
+
+<strong>Ajout:</strong>
+<ul>
+  <li>Ajout d'une nouvelle version de l'API qui inclus l'Id des rapport dans les requêtes</li>
+</ul>
+
+<strong>Correction:</strong>
+<ul>
+  <li>Correction d'un bug qui ne retournait par l'Id du rapport dans le formulaire détails</li>
+  <li>Correction d'un bug qui ne stockait pas le nouveau ticket suite à une requête POST</li>
+  <li>Corretion de fautes d'orthographe</li>
+</ul>
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 <i><stong>Version 1.1</stong></i>
 
 

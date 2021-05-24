@@ -412,7 +412,7 @@ namespace GsbRapports
             }
             else
             {
-                MessageBox.Show("Vous devez selectionner un visiteur et un médecin pour continuer?");
+                MessageBox.Show("Vous devez selectionner un visiteur et un médecin pour continuer");
             }
         }
     }
