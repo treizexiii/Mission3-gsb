@@ -81,14 +81,36 @@ namespace GsbRapports
             string idMedic = medicament.id.ToString();
             string qte = this.lstQte.SelectedValue.ToString();
             Offre offre = new Offre(idMedic, qte);
-            offres.Add(offre);
-            this.dtgRecap.Items.Add(offre);
+
+
+            //verifie la presence d'un medicament ayant le même id dans le datagrid. 
+            bool doublon = false;
+            foreach (Offre uneOffre in dtgRecap.Items)
+            {
+                if (uneOffre.id == offre.id)
+                {
+                    doublon = true;
+                    MessageBox.Show("Ce medicament a deja été ajouter, raffraichissez le tableau si vous souhaitez faire des modification de quantité");
+                }
+
+            }
+            // si il n'est pas present, ajout dans le datagrid 
+            if (doublon == false)
+            {
+                offres.Add(offre);
+                this.dtgRecap.Items.Add(offre);
+            }
+
+
+           
         }
 
-        //Rafraichi la liste des offres
+        //Rafraichi le datagrid et la liste des offres
         private void buttonSupMedic_Click(object sender, RoutedEventArgs e)
         {
             this.dtgRecap.Items.Clear();
+            this.offres.Clear();
+
         }
 
         //Envoyer le rapport
@@ -136,6 +158,7 @@ namespace GsbRapports
                     VoirVisiteWindow voir = new VoirVisiteWindow(wb, site, laSecretaire);
                     voir.Show();
                     this.Close();
+
                 }
                 catch (Exception ex)
                 {
