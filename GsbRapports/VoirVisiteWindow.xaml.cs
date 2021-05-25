@@ -330,7 +330,9 @@ namespace GsbRapports
         private void ClearInputDates()
         {
             startDateSelect = null;
+            startDate.SelectedDate = null;
             endDateSelect = null;
+            endDate.SelectedDate = null;
         }
 
         private void ClearInputMedecin()
