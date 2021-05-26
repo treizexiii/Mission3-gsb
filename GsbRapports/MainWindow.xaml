@@ -29,6 +29,9 @@
                     <MenuItem Header="_Modifier" Click="MenuItem_Click_1" />
                     <MenuItem Header="_Ajouter" Click="MenuItem_Click_2" />
                 </MenuItem>
+                <MenuItem Header="_Test">
+                    <MenuItem Header="_Voir" Click="TestMenu_Click"/>
+                </MenuItem>
             </Menu>
 
 

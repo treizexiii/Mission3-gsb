@@ -21,6 +21,8 @@ namespace GsbRapports
         private List<Offre> offres = new List<Offre>();
         private Visiteur leVisiteur;
         private Medecin leMedecin;
+        private readonly List<Rapport> _lesRapports;
+        private readonly List<string> _lesMotifs;
 
         public ajoutRapportWindow(
             WebClient wb,
@@ -55,6 +57,52 @@ namespace GsbRapports
             {
                 this.lstQte.Items.Add(i);
             }
+
+            _lesRapports = GetLesRapports();
+            if (_lesRapports.Count > 0)
+            {
+                _lesMotifs = GetMotifs();
+
+                if (_lesMotifs.Count > 0)
+                {
+                    foreach (var element in _lesMotifs)
+                    {
+                        ListMotif.Items.Add(element);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Réccupere une liste de rapports
+        /// </summary>
+        /// <returns>List<Rapport></returns>
+        private List<Rapport> GetLesRapports()
+        {
+            var url = site + "rapports?ticket=" + laSecretaire.getHashTicketMdp() + "&dateDebut=2016-01-01&dateFin=" + DateTime.Now.ToString("yyy-MM-dd");
+            var raw = wb.DownloadString(url);
+            var response = JsonConvert.DeserializeObject<ResponseRapports>(raw);
+            laSecretaire.ticket = response.ticket;
+            return response.rapports;
+        }
+
+        /// <summary>
+        /// Retourne une list de motifs sans doublon
+        /// </summary>
+        /// <returns>List<String></returns>
+        private List<string> GetMotifs()
+        {
+            List<string> motif = new List<string>();
+            foreach (var rapport in _lesRapports)
+            {
+                var isExist = motif.Contains(rapport.motif);
+                if (!isExist)
+                {
+                    motif.Add(rapport.motif);
+                }
+            }
+
+            return motif;
         }
 
         //Obtenir la liste des médicament d'une famille
@@ -96,52 +144,70 @@ namespace GsbRapports
         {
             if (this.motif.Text != string.Empty && this.saisieBilan.Text != string.Empty && this.date.SelectedDate != null)
             {
-                string motif = this.motif.Text;
-                string bilan = this.saisieBilan.Text;
-                string date = ((DateTime)this.date.SelectedDate).ToString("yyyy-MM-dd");
-
-                string ticket = this.laSecretaire.getHashTicketMdp();
-                string visiteur = this.leVisiteur.id.ToString();
-                string medecin = leMedecin.id.ToString();
-                string url = this.site + "rapports";
-
-                NameValueCollection parametres = new NameValueCollection();
-                parametres.Add("ticket", ticket);
-                parametres.Add("motif", motif);
-                parametres.Add("bilan", bilan);
-                parametres.Add("date", date);
-                parametres.Add("idMedecin", medecin);
-                parametres.Add("idVisiteur", visiteur);
-
-                foreach (var offre in offres)
+                if (motif.Text != string.Empty && ListMotif.SelectedItem != null)
                 {
-                    parametres.Add("medicaments[" + offre.id + "]", offre.qte);
+                    MessageBox.Show("Merci de sélectionner un motif OU de saisir un nouveau motif");
                 }
-
-                try
+                if (motif.Text == string.Empty && ListMotif.SelectedItem == null)
                 {
-                    byte[] tabByte = wb.UploadValues(url, "POST", parametres);
-                    string response = UnicodeEncoding.UTF8.GetString(tabByte);
-                    var responseConverted = Encoding.UTF8.GetString(Encoding.Convert(
-                                                Encoding.Default,
-                                                Encoding.UTF8,
-                                                Encoding.Default
-                                                    .GetBytes(response)
-                                                    .Where(b => b != '\n')
-                                                    .ToArray()
-                                                )
-                                            );
-                    laSecretaire.ticket = responseConverted;
-                    MessageBox.Show("Le rapport a bien été créé.");
-                    VoirVisiteWindow voir = new VoirVisiteWindow(wb, site, laSecretaire);
-                    voir.Show();
-                    this.Close();
+                    MessageBox.Show("Merci de présicer un motif");
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message);
-                }
+                    string motif = string.Empty;
+                    if (this.motif.Text.Length > 0)
+                    {
+                        motif = this.motif.Text;
+                    }
+                    if (ListMotif.SelectedItem != null)
+                    {
+                        motif = ListMotif.SelectedItem.ToString();
+                    }
+                    string bilan = this.saisieBilan.Text;
+                    string date = ((DateTime)this.date.SelectedDate).ToString("yyyy-MM-dd");
 
+                    string ticket = this.laSecretaire.getHashTicketMdp();
+                    string visiteur = this.leVisiteur.id.ToString();
+                    string medecin = leMedecin.id.ToString();
+                    string url = this.site + "rapports";
+
+                    NameValueCollection parametres = new NameValueCollection();
+                    parametres.Add("ticket", ticket);
+                    parametres.Add("motif", motif);
+                    parametres.Add("bilan", bilan);
+                    parametres.Add("date", date);
+                    parametres.Add("idMedecin", medecin);
+                    parametres.Add("idVisiteur", visiteur);
+
+                    foreach (var offre in offres)
+                    {
+                        parametres.Add("medicaments[" + offre.id + "]", offre.qte);
+                    }
+
+                    try
+                    {
+                        byte[] tabByte = wb.UploadValues(url, "POST", parametres);
+                        string response = UnicodeEncoding.UTF8.GetString(tabByte);
+                        var responseConverted = Encoding.UTF8.GetString(Encoding.Convert(
+                                                    Encoding.Default,
+                                                    Encoding.UTF8,
+                                                    Encoding.Default
+                                                        .GetBytes(response)
+                                                        .Where(b => b != '\n')
+                                                        .ToArray()
+                                                    )
+                                                );
+                        laSecretaire.ticket = responseConverted;
+                        MessageBox.Show("Le rapport a bien été créé.");
+                        VoirVisiteWindow voir = new VoirVisiteWindow(wb, site, laSecretaire);
+                        voir.Show();
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
             }
             else
             {

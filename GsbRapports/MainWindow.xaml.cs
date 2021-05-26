@@ -130,5 +130,11 @@ namespace GsbRapports
             VoirMedicaments medicaments = new VoirMedicaments(wb, site, laSecretaire);
             medicaments.Show();
         }
+
+        private void TestMenu_Click(object sender, RoutedEventArgs e)
+        {
+            TestMotifs test = new TestMotifs(wb, site, laSecretaire);
+            test.Show();
+        }
     }
 }

@@ -13,6 +13,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="352,78,0,0" TextWrapping="Wrap" Text="Motif de la visite :" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="21,202,0,0" TextWrapping="Wrap" Text="Date de la visite :" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="352,197,0,0" TextWrapping="Wrap" Text="Type de Médicaments :" VerticalAlignment="Top"/>
+        <ComboBox x:Name="ListMotif" HorizontalAlignment="Left" Width="361" VerticalAlignment="Top" Margin="352,75,0,0"/>
         <TextBox x:Name="motif" HorizontalAlignment="Left" Height="65" Margin="352,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="361"/>
         <Button Content="Valider" HorizontalAlignment="Left" Margin="37,379,0,0" VerticalAlignment="Top" Width="75" Click="Button_ValiderRapport"/>
         <Button Content="Annuler" HorizontalAlignment="Left" Margin="146,379,0,0" VerticalAlignment="Top" Width="75"/>
